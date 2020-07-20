@@ -1,4 +1,4 @@
-package com.zhousaito.imageloader
+package com.zhousaito.zzimageloader
 
 import org.junit.Test
 
