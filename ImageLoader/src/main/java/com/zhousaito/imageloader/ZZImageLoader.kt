@@ -1,5 +1,6 @@
 package com.zhousaito.imageloader
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
@@ -13,7 +14,28 @@ import android.widget.ImageView
 object ZZImageLoader {
     val TAG = "ImageLoader"
 
+    /**
+     * 获取本地缓存的cachePath
+     */
+    fun getCachePath(): String? {
+        return context?.cacheDir?.toString()
+    }
+
+    var context: Context? = null
+        private set
+
+    /**
+     * 用来获取路径
+     */
+    fun init(context: Context) {
+        this.context = context.applicationContext
+    }
+
     fun load(imageView: ImageView, requestUrl: String) {
+        if (context == null) {
+            context = imageView.context.applicationContext
+        }
+
         BitmapHttpClient.INSTANCE.request(requestUrl, object : BitmapHttpClient.BitmapCallback {
             override fun onBitmap(bitmap: Bitmap?) {
                 //45630 byte
