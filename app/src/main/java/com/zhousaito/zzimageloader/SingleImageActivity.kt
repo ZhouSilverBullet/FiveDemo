@@ -2,7 +2,7 @@ package com.zhousaito.zzimageloader
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.zhousaito.imageloader.ZZImageLoader
+import com.zhousaito.imageloader.Five
 import kotlinx.android.synthetic.main.activity_single_image.*
 
 class SingleImageActivity : AppCompatActivity() {
@@ -15,8 +15,8 @@ class SingleImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_image)
 
-        ZZImageLoader.load(ivSingleImage, imageArray[0])
-        ZZImageLoader.load(ivSingleImage2, imageArray[1])
-        ZZImageLoader.load(ivSingleImage3, imageArray[2])
+        Five.load(ivSingleImage, imageArray[0])
+        Five.load(ivSingleImage2, imageArray[1])
+        Five.load(ivSingleImage3, imageArray[2])
     }
 }

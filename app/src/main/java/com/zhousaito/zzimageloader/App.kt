@@ -1,7 +1,7 @@
 package com.zhousaito.zzimageloader
 
 import android.app.Application
-import com.zhousaito.imageloader.ZZImageLoader
+import com.zhousaito.imageloader.Five
 
 /**
  * @author  zhousaito
@@ -12,6 +12,6 @@ import com.zhousaito.imageloader.ZZImageLoader
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        ZZImageLoader.init(this)
+        Five.init(this)
     }
 }

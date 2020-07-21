@@ -1,3 +1,3 @@
-include ':ImageLoader'
+include ':five'
 include ':app'
-rootProject.name = "ZZImageloader"
+rootProject.name = "FiveDemo"
