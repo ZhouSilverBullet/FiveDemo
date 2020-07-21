@@ -18,7 +18,7 @@ class HttpClient {
         fun onSuccess(stream: InputStream)
     }
 
-    fun httpGet(httpUrl: String, callback: Callback?) {
+    fun httpGet(httpUrl: String?, callback: Callback?) {
         THREAD_POOL.execute {
             val url = URL(httpUrl)
             val conn = openConnection(url)

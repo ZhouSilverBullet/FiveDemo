@@ -38,7 +38,7 @@ class BitmapHttpClient private constructor() {
      * 1. 内存缓存
      * 2. 本地磁盘缓存
      */
-    fun request(requestUrl: String, callback: BitmapCallback?) {
+    fun request(requestUrl: String?, callback: BitmapCallback?) {
         //内存缓存
         Log.e(TAG, "--------------")
         var bit = bitmapCache.get(requestUrl)
@@ -77,7 +77,7 @@ class BitmapHttpClient private constructor() {
     /**
      * 获取本地的图片，转换成bitmap
      */
-    private fun getLocalBitmapForUrl(requestUrl: String): Bitmap? {
+    private fun getLocalBitmapForUrl(requestUrl: String?): Bitmap? {
         val fileName = MD5Helper.encode(requestUrl)
         val file = File(Five.getCachePath() + File.separator + fileName)
         if (file.exists() && file.length() > 0) {
@@ -89,7 +89,7 @@ class BitmapHttpClient private constructor() {
     /**
      * 将bitmap转为本地图片
      */
-    private fun saveLocalBitmapForUrl(bitmap: Bitmap, requestUrl: String): Boolean {
+    private fun saveLocalBitmapForUrl(bitmap: Bitmap, requestUrl: String?): Boolean {
         val fileName = MD5Helper.encode(requestUrl)
         val file = File(Five.getCachePath() + File.separator + fileName)
         if (!file.exists()) {

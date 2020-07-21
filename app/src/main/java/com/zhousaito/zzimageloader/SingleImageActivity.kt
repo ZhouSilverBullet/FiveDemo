@@ -15,7 +15,9 @@ class SingleImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_image)
 
-        Five.load(ivSingleImage, imageArray[0])
+//        Five.load(ivSingleImage, imageArray[0])
+        Five.load(imageArray[0]).into(ivSingleImage)
+
         Five.load(ivSingleImage2, imageArray[1])
         Five.load(ivSingleImage3, imageArray[2])
     }
