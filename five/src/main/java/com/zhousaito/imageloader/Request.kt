@@ -13,6 +13,7 @@ abstract class Request<V, T> : RequestCallback<T> {
 
     //imageView弱引用，方便在回收的时候，不会内存泄漏
     var imageViewRef: WeakReference<V>? = null
+    var options: RequestOptions? = null
 
     internal constructor(url: String) {
         this.url = url
@@ -20,9 +21,18 @@ abstract class Request<V, T> : RequestCallback<T> {
 
     fun into(imageView: V) {
         imageViewRef = WeakReference(imageView)
+        prepare()
         //进行网络请求
         BitmapHttpClient.INSTANCE.request(url as String, this)
 
     }
 
+    open fun prepare() {
+
+    }
+
+    fun apply(options: RequestOptions): Request<V, T> {
+        this.options = options;
+        return this
+    }
 }

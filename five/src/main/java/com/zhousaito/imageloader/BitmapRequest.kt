@@ -17,7 +17,10 @@ class BitmapRequest(requestUrl: String) : Request<ImageView, Bitmap>(requestUrl)
 
     override fun onFailure(code: Int, errorMsg: String) {
         //设置失败状态
-
+        imageViewRef?.get()?.setImageResource(options?.errorId ?: 0)
     }
 
+    override fun prepare() {
+        imageViewRef?.get()?.setImageResource(options?.placeholderId ?: 0)
+    }
 }

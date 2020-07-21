@@ -3,6 +3,7 @@ package com.zhousaito.zzimageloader
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zhousaito.imageloader.Five
+import com.zhousaito.imageloader.RequestOptions
 import kotlinx.android.synthetic.main.activity_single_image.*
 
 class SingleImageActivity : AppCompatActivity() {
@@ -16,9 +17,12 @@ class SingleImageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_single_image)
 
 //        Five.load(ivSingleImage, imageArray[0])
-        Five.load(imageArray[0]).into(ivSingleImage)
-        Five.load(imageArray[1]).into(ivSingleImage2)
-        Five.load(imageArray[2]).into(ivSingleImage3)
+        val requestOptions = RequestOptions()
+        requestOptions.errorId = R.mipmap.loading_icon
+        requestOptions.placeholderId = R.drawable.img_loading
+        Five.load(imageArray[0]).apply(requestOptions).into(ivSingleImage)
+        Five.load(imageArray[1]).apply(requestOptions).into(ivSingleImage2)
+        Five.load(imageArray[2]).apply(requestOptions).into(ivSingleImage3)
 
     }
 }
