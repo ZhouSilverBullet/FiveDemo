@@ -31,18 +31,6 @@ object Five {
         this.context = context.applicationContext
     }
 
-    fun load(imageView: ImageView, requestUrl: String) {
-        if (context == null) {
-            context = imageView.context.applicationContext
-        }
-
-        BitmapHttpClient.INSTANCE.request(requestUrl, object : BitmapHttpClient.BitmapCallback {
-            override fun onBitmap(bitmap: Bitmap?) {
-                imageView.setImageBitmap(bitmap)
-            }
-        })
-    }
-
     fun load(url: String): Request {
         return Request(url)
     }

@@ -18,6 +18,7 @@ class BitmapHttpClient private constructor() {
 
     companion object {
         val TAG = "BitmapHttpClient"
+
         //单例上
         val INSTANCE by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             BitmapHttpClient()
@@ -28,17 +29,12 @@ class BitmapHttpClient private constructor() {
     val handler = Handler(Looper.getMainLooper())
     val bitmapCache = BitmapLruCache()
 
-
-    interface BitmapCallback {
-        fun onBitmap(bitmap: Bitmap?)
-    }
-
     /**
      * 这里应该分2级缓存
      * 1. 内存缓存
      * 2. 本地磁盘缓存
      */
-    fun request(requestUrl: String?, callback: BitmapCallback?) {
+    fun request(requestUrl: String?, callback: RequestCallback?) {
         //内存缓存
         Log.e(TAG, "--------------")
         var bit = bitmapCache.get(requestUrl)
@@ -59,18 +55,18 @@ class BitmapHttpClient private constructor() {
                         }
                         Log.e(TAG, "正常网络去获取")
                         handler.post {
-                            callback?.onBitmap(bitmap)
+                            callback?.onSuccess(bitmap)
                         }
                     }
                 })
             } else {
                 Log.e(TAG, "走磁盘缓存里面去拿")
                 bitmapCache.put(requestUrl, bit)
-                callback?.onBitmap(bit)
+                callback?.onSuccess(bit)
             }
         } else {
             Log.e(TAG, "走内存缓存里面去拿")
-            callback?.onBitmap(bit)
+            callback?.onSuccess(bit)
         }
     }
 

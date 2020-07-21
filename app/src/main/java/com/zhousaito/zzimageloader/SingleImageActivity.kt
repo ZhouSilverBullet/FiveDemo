@@ -1,7 +1,7 @@
 package com.zhousaito.zzimageloader
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.zhousaito.imageloader.Five
 import kotlinx.android.synthetic.main.activity_single_image.*
 
@@ -17,8 +17,8 @@ class SingleImageActivity : AppCompatActivity() {
 
 //        Five.load(ivSingleImage, imageArray[0])
         Five.load(imageArray[0]).into(ivSingleImage)
+        Five.load(imageArray[1]).into(ivSingleImage2)
+        Five.load(imageArray[2]).into(ivSingleImage3)
 
-        Five.load(ivSingleImage2, imageArray[1])
-        Five.load(ivSingleImage3, imageArray[2])
     }
 }
