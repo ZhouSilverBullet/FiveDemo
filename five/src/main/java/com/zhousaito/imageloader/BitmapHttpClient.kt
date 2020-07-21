@@ -34,7 +34,7 @@ class BitmapHttpClient private constructor() {
      * 1. 内存缓存
      * 2. 本地磁盘缓存
      */
-    fun request(requestUrl: String?, callback: RequestCallback?) {
+    fun <T> request(requestUrl: String?, callback: RequestCallback<T>?) {
         //内存缓存
         Log.e(TAG, "--------------")
         var bit = bitmapCache.get(requestUrl)
@@ -43,7 +43,7 @@ class BitmapHttpClient private constructor() {
             bit = getLocalBitmapForUrl(requestUrl)
             if (bit == null) {
                 //最后请求网络
-                httpClient.httpGet(requestUrl, object : HttpClient.Callback {
+                httpClient.httpGet(requestUrl, object : RequestCallback<InputStream> {
                     override fun onSuccess(stream: InputStream) {
                         val bitmap = BitmapFactory.decodeStream(stream)
                         stream.close()
@@ -55,18 +55,22 @@ class BitmapHttpClient private constructor() {
                         }
                         Log.e(TAG, "正常网络去获取")
                         handler.post {
-                            callback?.onSuccess(bitmap)
+                            callback?.onSuccess(bitmap as T)
                         }
+                    }
+
+                    override fun onFailure(code: Int, errorMsg: String) {
+                        callback?.onFailure(code, errorMsg)
                     }
                 })
             } else {
                 Log.e(TAG, "走磁盘缓存里面去拿")
                 bitmapCache.put(requestUrl, bit)
-                callback?.onSuccess(bit)
+                callback?.onSuccess(bit as T)
             }
         } else {
             Log.e(TAG, "走内存缓存里面去拿")
-            callback?.onSuccess(bit)
+            callback?.onSuccess(bit as T)
         }
     }
 

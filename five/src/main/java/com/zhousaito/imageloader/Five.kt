@@ -31,8 +31,8 @@ object Five {
         this.context = context.applicationContext
     }
 
-    fun load(url: String): Request {
-        return Request(url)
+    fun load(url: String): Request<ImageView, Bitmap> {
+        return BitmapRequest(url)
     }
 
     /**

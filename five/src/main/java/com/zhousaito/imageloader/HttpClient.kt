@@ -3,6 +3,7 @@ package com.zhousaito.imageloader
 import com.zhousaito.imageloader.Dispatcher.THREAD_POOL
 import java.io.BufferedInputStream
 import java.io.InputStream
+import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -14,17 +15,17 @@ import java.net.URL
  */
 class HttpClient {
 
-    interface Callback {
-        fun onSuccess(stream: InputStream)
-    }
-
-    fun httpGet(httpUrl: String?, callback: Callback?) {
+    fun httpGet(httpUrl: String?, callback: RequestCallback<InputStream>?) {
         THREAD_POOL.execute {
-            val url = URL(httpUrl)
-            val conn = openConnection(url)
-            conn.connect()
-            val bis = BufferedInputStream(conn.inputStream)
-            callback?.onSuccess(bis)
+            try {
+                val url = URL(httpUrl)
+                val conn = openConnection(url)
+                conn.connect()
+                val bis = BufferedInputStream(conn.inputStream)
+                callback?.onSuccess(bis)
+            } catch (e: Exception) {
+                callback?.onFailure(-100, "暂时是未知网络错误")
+            }
         }
     }
 

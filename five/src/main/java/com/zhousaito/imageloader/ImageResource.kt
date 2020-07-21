@@ -6,7 +6,8 @@ package com.zhousaito.imageloader
  * @version 1.0
  * @Dec 略
  */
-class ImageResource(override val fileName: String,
-                    override val requestUrl: String) :Resource {
-
-}
+class ImageResource(
+    override val fileName: String,
+    override val requestUrl: String,
+    override val type: Int
+) : Resource

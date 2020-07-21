@@ -17,4 +17,20 @@ interface Resource {
      */
     val requestUrl: String
 
+    /**
+     * 资源类型
+     */
+    val type: Int
+
+    companion object {
+        /**
+         * http资源
+         */
+        const val TYPE_HTTP = 0
+
+        /**
+         * res资源
+         */
+        const val TYPE_RES = 1
+    }
 }
