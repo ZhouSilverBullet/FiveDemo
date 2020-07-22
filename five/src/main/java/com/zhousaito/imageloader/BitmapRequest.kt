@@ -12,7 +12,18 @@ import android.widget.ImageView
 class BitmapRequest(requestUrl: String) : Request<ImageView, Bitmap>(requestUrl) {
 
     override fun onSuccess(t: Bitmap) {
-        imageViewRef?.get()?.setImageBitmap(t)
+        when (options?.circleType) {
+            CircleType.Circle -> {
+                imageViewRef?.get()?.setImageBitmap(BitmapUtil.toRoundBitmap(t))
+            }
+            CircleType.RoundedCorn -> {
+                imageViewRef?.get()
+                    ?.setImageBitmap(BitmapUtil.toRoundedCornerBitmap(t, options?.roundCorn ?: 8f))
+            }
+            else -> {
+                imageViewRef?.get()?.setImageBitmap(t)
+            }
+        }
     }
 
     override fun onFailure(code: Int, errorMsg: String) {
