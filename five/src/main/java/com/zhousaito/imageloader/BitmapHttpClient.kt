@@ -81,7 +81,7 @@ class BitmapHttpClient private constructor() {
         val fileName = MD5Helper.encode(requestUrl)
         val file = File(Five.getCachePath() + File.separator + fileName)
         if (file.exists() && file.length() > 0) {
-            return BitmapFactory.decodeStream(BufferedInputStream(FileInputStream(file)))
+            return BitmapFactory.decodeStream(BufferedInputStream(FileInputStream(file), file.length().toInt()))
         }
         return null
     }
